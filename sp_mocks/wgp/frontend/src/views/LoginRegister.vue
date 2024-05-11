@@ -10,8 +10,8 @@ const BACKEND_URL =  import.meta.env.VITE_BACKEND_URL
 const router = useRouter();
 const registerUsername = ref("");
 const registerPassword = ref("");
-const loginEmail = ref("");
-const loginPassword = ref("");
+const loginEmail = ref("tester");
+const loginPassword = ref("1234");
 const profileImage = ref(null);
 const isRegister = ref(false);
 const isLoggedIn = computed(() => SpToken.value !== null);
