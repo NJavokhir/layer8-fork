@@ -129,15 +129,9 @@ func main() {
 		time.Now,
 	)
 
-	verificationCodeValidityDuration, e :=
-		time.ParseDuration(os.Getenv("VERIFICATION_CODE_VALIDITY_DURATION"))
-	if e != nil {
-		log.Fatalf("error parsing verification code validity duration: %e", e)
-	}
-
 	// Run server (which never returns)
 	Server(
-		svc.NewService(resourceRepository, emailVerifier, verificationCodeValidityDuration),
+		svc.NewService(resourceRepository, emailVerifier),
 		oauthService,
 	)
 }

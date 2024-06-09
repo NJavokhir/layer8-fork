@@ -5,6 +5,7 @@ import (
 	"globe-and-citizen/layer8/server/resource_server/emails/sender"
 	"globe-and-citizen/layer8/server/resource_server/emails/verification/code"
 	"globe-and-citizen/layer8/server/resource_server/models"
+	"log"
 	"os"
 	"time"
 )
@@ -12,15 +13,17 @@ import (
 type EmailVerifier struct {
 	adminEmailAddress string
 
-	emailSenderService sender.Service
+	emailSenderService sender.EmailService
 	codeGenerator      code.Generator
 
 	now func() time.Time
+
+	VerificationCodeValidityDuration time.Duration
 }
 
 func NewEmailVerifier(
 	adminEmailAddress string,
-	emailSenderService sender.Service,
+	emailSenderService sender.EmailService,
 	codeGenerator code.Generator,
 	now func() time.Time,
 ) *EmailVerifier {
@@ -30,6 +33,13 @@ func NewEmailVerifier(
 	verifier.emailSenderService = emailSenderService
 	verifier.codeGenerator = codeGenerator
 	verifier.now = now
+
+	var e error
+	verifier.VerificationCodeValidityDuration, e =
+		time.ParseDuration(os.Getenv("VERIFICATION_CODE_VALIDITY_DURATION"))
+	if e != nil {
+		log.Fatalf("error parsing verification code validity duration: %e", e)
+	}
 
 	return verifier
 }
@@ -43,7 +53,7 @@ func (v *EmailVerifier) SendVerificationEmail(user *models.User, verificationCod
 		&models.Email{
 			From:    v.adminEmailAddress,
 			To:      user.Email,
-			Subject: os.Getenv("VERIFICATION_EMAIL_SUBJECT"),
+			Subject: "Verify your email at the Layer8 service",
 			Content: models.VerificationEmailContent{
 				Username: user.Username,
 				Code:     verificationCode,
