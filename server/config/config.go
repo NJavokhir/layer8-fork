@@ -26,7 +26,7 @@ func InitDB() {
 	dbHost := os.Getenv("DB_HOST")
 	dbName := os.Getenv("DB_NAME")
 	dbPort := os.Getenv("DB_PORT")
-	sslMode := os.Getenv("SSL_MODE")
+	sslMode := os.Getenv("SSL_MODE") 
 	sslRootCert := os.Getenv("SSL_ROOT_CERT")
 	var dsn string
 
