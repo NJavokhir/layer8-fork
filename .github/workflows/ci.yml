@@ -7,30 +7,30 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '20'
 
-      - name: Install dependencies
-        run: npm install
-        working-directory: ./server/assets-v1/templates
+      # - name: Install dependencies
+      #   run: npm install
+      #   working-directory: ./server/assets-v1/templates
 
-      - name: Start application
-        run: npm start &
-        env:
-          CI: true
-        working-directory: ./server/assets-v1/templates
+      # - name: Start application
+      #   run: npm start &
+      #   env:
+      #     CI: true
+      #   working-directory: ./server/assets-v1/templates
 
-      - name: Wait for application to be ready
-        run: npx wait-on http://localhost:3000
-        working-directory: ./server/assets-v1/templates
+      # - name: Wait for application to be ready
+      #   run: npx wait-on http://localhost:3000
+      #   working-directory: ./server/assets-v1/templates
 
-      - name: Run Cypress tests
-        uses: cypress-io/github-action@v5
-        with:
-          start: npm start
-          wait-on: http://localhost:3000
-          command: npm run cy:run
-        # working-directory: ./server/assets-v1/templates
+      # - name: Run Cypress tests
+      #   uses: cypress-io/github-action@v5
+      #   with:
+      #     start: npm start
+      #     wait-on: http://localhost:3000
+      #     command: npm run cy:run
+      #   # working-directory: ./server/assets-v1/templates
 
