@@ -7,14 +7,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-      #     node-version: '20'
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
 
-      # - name: Install dependencies
-      #   run: npm install
-      #   working-directory: ./server/assets-v1/templates
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./server/assets-v1/templates
 
       # - name: Start application
       #   run: npm start &
