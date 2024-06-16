@@ -14,7 +14,7 @@ jobs:
 
       - name: Install dependencies
         run: npm install
-        working-directory: ./server/assets-v1/templates
+        working-directory: ./server/assets-v1/templatess
 
       # - name: Start application
       #   run: npm start &
