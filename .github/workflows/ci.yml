@@ -15,6 +15,10 @@ jobs:
       - name: Install dependencies
         run: npm install
         working-directory: ./server/assets-v1/templates
+      
+      - name: Run Cypress
+        run: npx cypress open
+        working-directory: ./server/assets-v1/templates
 
       # - name: Start application
       #   run: npm start &
