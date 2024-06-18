@@ -20,6 +20,10 @@ jobs:
         run: npm install cypress
         working-directory: ./server/assets-v1/templates
 
+      - name: Install wait-on
+        run: npm install wait-on
+        working-directory: ./server/assets-v1/templates
+
       - name: Install dependencies for server
         run: sudo apt-get install -y make
 
