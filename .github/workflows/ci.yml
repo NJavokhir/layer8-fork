@@ -27,7 +27,7 @@ jobs:
         run: make setup_and_run &
 
       - name: Run Cypress
-        run: npx cypress open
+        run: npx cypress run
         working-directory: ./server/assets-v1/templates
 
       # - name: Start application
