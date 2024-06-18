@@ -26,9 +26,6 @@ jobs:
       - name: Start the server
         run: make setup_and_run &
 
-      - name: Wait for server to be ready
-        run: npx wait-on http://localhost:5001
-
       - name: Run Cypress
         run: npx cypress open
         working-directory: ./server/assets-v1/templates
