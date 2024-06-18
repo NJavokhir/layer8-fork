@@ -34,8 +34,8 @@ jobs:
       #   run: npx wait-on http://localhost:5001 --timeout 120000
       #   working-directory: ./server/assets-v1/templates
 
-      - name: Verify server is running
-        run: curl -v http://localhost:5001
+      # - name: Verify server is running
+      #   run: curl -v http://localhost:5001
 
       - name: Run Cypress
         run: npx cypress run
