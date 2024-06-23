@@ -1,5 +1,7 @@
 name: End-to-end tests
+
 on: [push]
+
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
@@ -20,10 +22,6 @@ jobs:
         run: npm install cypress
         working-directory: ./server/assets-v1/templates
 
-      - name: Install wait-on
-        run: npm install wait-on
-        working-directory: ./server/assets-v1/templates
-
       - name: Install dependencies for server
         run: sudo apt-get install -y make
 
@@ -32,47 +30,6 @@ jobs:
           make setup_and_run &
           for attempt in {1..30}; do sleep 2; if curl -s http://localhost:5001/ > /dev/null; then break; fi; done
 
-      # - name: Wait for server to be ready
-      #   run: npx wait-on http://localhost:5001 --timeout 120000
-      #   working-directory: ./server/assets-v1/templates
-
-      # - name: Verify server is running
-      #   run: curl -v http://localhost:5001
-
       - name: Run Cypress
         run: npx cypress run
         working-directory: ./server/assets-v1/templates
-
-      - name: Upload Cypress videos
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-videos
-          path: ./server/assets-v1/templates/cypress/videos
-
-      - name: Upload Cypress screenshots
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: cypress-screenshots
-          path: ./server/assets-v1/templates/cypress/screenshots
-
-
-      # - name: Start application
-      #   run: npm start &
-      #   env:
-      #     CI: true
-      #   working-directory: ./server/assets-v1/templates
-
-      # - name: Wait for application to be ready
-      #   run: npx wait-on http://localhost:3000
-      #   working-directory: ./server/assets-v1/templates
-
-      # - name: Run Cypress tests
-      #   uses: cypress-io/github-action@v5
-      #   with:
-      #     start: npm start
-      #     wait-on: http://localhost:3000
-      #     command: npm run cy:run
-      #   # working-directory: ./server/assets-v1/templates
-
